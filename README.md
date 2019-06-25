@@ -1,6 +1,11 @@
 # Ranking Policy Gradient
-Ranking Policy Gradient (RPG) is a sample-efficienct policy gradient method
-that learns optimal ranking of actions with respect to the long term reward.
+Ranking Policy Gradient (RPG) is a sample-efficient off-policy policy gradient method
+that learns optimal ranking of actions to maximize the return.
+RPG has the following practical advantages:
+- It is currently the most sample-efficient model-free algorithm for learning deterministic policies.
+- It is effortless to incorporate any exploration algorithm to improve the sample-efficiency of RPG further.
+- It is possible to learn a single RPG agent (parameterized by one neural network) that adapts to dynamic action space.  
+
 This codebase contains the implementation of RPG using the
 [dopamine](https://github.com/google/dopamine) framework. 
 
