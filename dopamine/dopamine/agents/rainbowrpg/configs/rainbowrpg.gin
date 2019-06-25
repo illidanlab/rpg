@@ -1,0 +1,35 @@
+# Hyperparameters follow Hessel et al. (2018), except for sticky_actions,
+# which was False (not using sticky actions) in the original paper.
+import dopamine.agents.rainbowrpg.rainbowrpg_agent
+import dopamine.atari.run_experiment
+import dopamine.replay_memory.prioritized_replay_buffer
+import gin.tf.external_configurables
+
+RainbowRPGAgent.num_atoms = 51
+RainbowRPGAgent.vmax = 10.
+RainbowRPGAgent.gamma = 0.99
+RainbowRPGAgent.update_horizon = 3
+RainbowRPGAgent.min_replay_history = 20000  # agent steps lkx
+RainbowRPGAgent.update_period = 4
+RainbowRPGAgent.target_update_period = 8000  # agent steps
+RainbowRPGAgent.epsilon_train = 0.01
+RainbowRPGAgent.epsilon_eval = 0  # changed by lkx
+RainbowRPGAgent.epsilon_decay_period = 250000  # agent steps
+RainbowRPGAgent.replay_scheme = 'prioritized'
+RainbowRPGAgent.tf_device = '/gpu:0'  # use '/cpu:*' for non-GPU version
+RainbowRPGAgent.optimizer = @tf.train.AdamOptimizer()
+
+# Note these parameters are different from C51's.
+tf.train.AdamOptimizer.learning_rate = 0.0000625
+tf.train.AdamOptimizer.epsilon = 0.00015
+
+Runner.game_name = 'Pong'
+# Sticky actions with probability 0.25, as suggested by (Machado et al., 2017).
+Runner.sticky_actions = False   # changed by lkx
+Runner.num_iterations = 15      # changed by lkx
+Runner.training_steps = 250000  # agent steps
+Runner.evaluation_steps = 125000  # agent steps
+Runner.max_steps_per_episode = 27000  # agent steps
+
+WrappedPrioritizedReplayBuffer.replay_capacity = 1000000
+WrappedPrioritizedReplayBuffer.batch_size = 32  # changed by lkx

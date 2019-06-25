@@ -1,0 +1,41 @@
+# Hyperparameters follow Dabney et al. (2018), but we modify as necessary to
+# match those used in Rainbow (Hessel et al., 2018), to ensure apples-to-apples
+# comparison.
+
+import dopamine.agents.implicit_quantilerpg.implicit_quantilerpg_agent
+import dopamine.agents.rainbow.rainbow_agent
+import dopamine.agents.rainbowrpg.rainbowrpg_agent
+import dopamine.atari.run_experiment
+import dopamine.replay_memory.prioritized_replay_buffer
+import gin.tf.external_configurables
+
+ImplicitQuantileRPGAgent.kappa = 1.0
+ImplicitQuantileRPGAgent.num_tau_samples = 64
+ImplicitQuantileRPGAgent.num_tau_prime_samples = 64
+ImplicitQuantileRPGAgent.num_quantile_samples = 32
+RainbowRPGAgent.gamma = 0.99
+RainbowRPGAgent.update_horizon = 3
+RainbowRPGAgent.min_replay_history = 20000 # agent steps
+RainbowRPGAgent.update_period = 4
+RainbowRPGAgent.target_update_period = 8000 # agent steps
+RainbowRPGAgent.epsilon_train = 0.01
+RainbowRPGAgent.epsilon_eval = 0.001
+RainbowRPGAgent.epsilon_decay_period = 250000  # agent steps
+# IQN currently does not support prioritized replay.
+RainbowRPGAgent.replay_scheme = 'uniform'
+RainbowRPGAgent.tf_device = '/gpu:0'  # '/cpu:*' use for non-GPU version
+RainbowRPGAgent.optimizer = @tf.train.AdamOptimizer()
+
+tf.train.AdamOptimizer.learning_rate = 0.0000625
+tf.train.AdamOptimizer.epsilon = 0.00015
+
+Runner.game_name = 'Breakout'
+# Sticky actions with probability 0.25, as suggested by (Machado et al., 2017).
+Runner.sticky_actions = False
+Runner.num_iterations = 15
+Runner.training_steps = 250000
+Runner.evaluation_steps = 125000
+Runner.max_steps_per_episode = 27000
+
+WrappedPrioritizedReplayBuffer.replay_capacity = 1000000
+WrappedPrioritizedReplayBuffer.batch_size = 32
