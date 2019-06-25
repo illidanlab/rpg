@@ -46,7 +46,7 @@ For more complicated games, we adopt implicit quantile network as the exploratio
 
 ## Hyperparameters
 The hyperparameters of networks, optimizers, etc., are same as the [baselines](https://github.com/KaixiangLin/dopamine/tree/master/baselines) in dopamine. 
-The trajectory reward threshold c (see Def 5 in the paper (TODO)) for each game is given as follows:
+The trajectory reward threshold c (see Def 5 in the [paper](https://arxiv.org/abs/1906.09674)) for each game is given as follows:
 
 | game  | c  |
 |---|---|

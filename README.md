@@ -1,6 +1,6 @@
 # Ranking Policy Gradient
-Ranking Policy Gradient (RPG) is a sample-efficienct  policy gradient method
-that learns optimal ranking of actions with respect to the  long term reward.
+Ranking Policy Gradient (RPG) is a sample-efficienct policy gradient method
+that learns optimal ranking of actions with respect to the long term reward.
 This codebase contains the implementation of RPG using the
 [dopamine](https://github.com/google/dopamine) framework. 
 
@@ -41,8 +41,11 @@ To reproduce the results in the paper, please refer to the instruction in [here]
 
 If you use this RPG implementation in your work, please consider citing the following papers:
 ```
-TODO(RPG): 
+@article{lin2019ranking,
+  title={Ranking Policy Gradient},
+  author={Lin, Kaixiang and Zhou, Jiayu},
+  journal={arXiv preprint arXiv:1906.09674},
+  year={2019}
+}
 ```
 
-## Acknowledgments
-TODO(dopamine framework, fundings). 
