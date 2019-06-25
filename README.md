@@ -8,6 +8,7 @@ RPG has the following practical advantages:
 
 This codebase contains the implementation of RPG using the
 [dopamine](https://github.com/google/dopamine) framework. 
+The preprint of the RPG paper is available [here](https://arxiv.org/abs/1906.09674).
 
 
 ## Instructions
